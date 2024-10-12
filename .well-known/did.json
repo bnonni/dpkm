@@ -1,0 +1,28 @@
+{
+    "id": "did:web:drpm.tools",
+    "service": [
+        {
+            "id": "did:web:drpm.tools",
+            "type": "DecentralizedWebNode",
+            "serviceEndpoint": [
+                "https://dwn.drpm.tools/"
+            ],
+            "enc": "#enc",
+            "sig": "#sig"
+        },
+        {
+            "id": "DpkRegistry",
+            "type": "DpkRegistry",
+            "serviceEndpoint": [
+                "https://registry.drpm.tools/"
+            ]
+        },
+        {
+            "id": "DpkExplorer",
+            "type": "DpkExplorer",
+            "serviceEndpoint": [
+                "https://explorer.drpm.tools/"
+            ]
+        }
+    ]
+}
