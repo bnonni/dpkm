@@ -1,8 +1,16 @@
 import { Web5 } from '@web5/api';
 import { createHash } from 'crypto';
 import { readFile } from 'fs/promises';
-import dpm from '../../src/protocol.js';
+import drpm from '../../src/protocol.js';
 import { Logger } from '../../src/utils/logger.js';
+
+
+// Custom logic for publishing DPKs
+export function dpmPublish() {
+  Logger.log('Executing custom publish logic...');
+  // Placeholder for custom publish logic
+  // ...
+}
 
 const sync = '30s';
 const password = 'correct horse battery staple';
@@ -22,7 +30,7 @@ const version = '5.0.0';
 const filePath = '/Users/bryan/Projects/TBD/bnonni/tool5/tool5-5.0.0.tgz';
 Logger.log('filePath', filePath);
 
-const { status: configure, protocol } = await web5.dwn.protocols.configure({ message: { definition: dpm }});
+const { status: configure, protocol } = await web5.dwn.protocols.configure({ message: { definition: drpm }});
 Logger.log('configure', configure);
 
 if (!protocol) {
@@ -52,9 +60,9 @@ const { record, status: create } = await web5.dwn.records.create({
   data    : { package: tgzFile },
   message : {
     dataFormat   : 'application/json',
-    schema       : dpm.types.release.schema,
+    schema       : drpm.types.release.schema,
     protocolPath : 'release',
-    protocol     : dpm.protocol,
+    protocol     : drpm.protocol,
     tags         : {
       name,
       version,
@@ -78,9 +86,9 @@ if(!record) {
 //   message : {
 //     filter : {
 //       dataFormat   : 'application/json',
-//       schema       : dpm.types.release.schema,
+//       schema       : drpm.types.release.schema,
 //       protocolPath : 'release',
-//       protocol     : dpm.protocol,
+//       protocol     : drpm.protocol,
 //       tags         : {
 //         name    : 'tool5',
 //         version : '1.0.2',

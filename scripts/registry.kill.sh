@@ -3,7 +3,7 @@
 set -e  # Exit immediately on any error
 
 REGISTRY_PID_FILE="registry.pid"
-REGISTRY_PROCESS_NAME="registry.dpm.software"
+REGISTRY_PROCESS_NAME="registry.drpm.tools"
 
 # Function to kill the registry process
 kill_registry_process() {

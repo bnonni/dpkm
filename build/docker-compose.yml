@@ -1,14 +1,14 @@
 version: '3'
 services:
-  dpm-registry:
+  drpm-registry:
     build: .
-    container_name: dpm-registry-container
+    container_name: drpm-registry-container
     ports:
       - "2092:2092"
     networks:
       - dpm_network
     environment:
-      - VIRTUAL_HOST=registry.dpm.software.local
+      - VIRTUAL_HOST=registry.drpm.software.local
 
 networks:
   dpm_network:

@@ -1,7 +1,7 @@
 import { Web5 } from '@web5/api';
 import { createHash } from 'crypto';
 import { readFile } from 'fs/promises';
-import dpm from '../src/protocol.js';
+import drpm from '../src/protocol.js';
 import { join } from 'path';
 import metadata from './dpk-metadata.js';
 
@@ -13,11 +13,11 @@ async function sha512Integrity(tgzFilepath: string): Promise<string> {
 }
 
 async function configureProtocol() {
-  const { status, protocol } = await web5.dwn.protocols.configure({ message: { definition: dpm }});
+  const { status, protocol } = await web5.dwn.protocols.configure({ message: { definition: drpm }});
   console.log('configureProtocol => status', status);
 
   if (!protocol) {
-    throw new Error('Failed to configure dpm protocol');
+    throw new Error('Failed to configure drpm protocol');
   }
   console.log('configureProtocol => protocol', protocol);
 
@@ -32,9 +32,9 @@ async function releaseDPK({ version, dpk, integrity, parentId }) {
       parentContextId : parentId,
       published       : true,
       dataFormat      : 'application/octet-stream',
-      schema          : dpm.types.release.schema,
+      schema          : drpm.types.release.schema,
       protocolPath    : 'package/release',
-      protocol        : dpm.protocol,
+      protocol        : drpm.protocol,
       tags            : {
         version,
         integrity
@@ -57,9 +57,9 @@ async function createDPK({ name }: { name: string; }) {
     message : {
       published    : true,
       dataFormat   : 'application/json',
-      schema       : dpm.types.package.schema,
+      schema       : drpm.types.package.schema,
       protocolPath : 'package',
-      protocol     : dpm.protocol,
+      protocol     : drpm.protocol,
       tags         : { name }
     },
   });
@@ -78,9 +78,9 @@ async function queryPackages({name}) {
     message : {
       filter : {
         dataFormat   : 'application/json',
-        schema       : dpm.types.package.schema,
+        schema       : drpm.types.package.schema,
         protocolPath : 'package',
-        protocol     : dpm.protocol,
+        protocol     : drpm.protocol,
         tags         : { name },
       },
     },
@@ -100,9 +100,9 @@ async function queryReleases({ version, integrity, parentId }) {
       filter : {
         parentId,
         dataFormat   : 'application/json',
-        schema       : dpm.types.release.schema,
+        schema       : drpm.types.release.schema,
         protocolPath : 'package/release',
-        protocol     : dpm.protocol,
+        protocol     : drpm.protocol,
         tags         : {
           version,
           integrity
@@ -121,9 +121,9 @@ async function queryReleases({ version, integrity, parentId }) {
 const password = 'correct horse battery staple';
 const dwnEndpoints = ['http://localhost:3000'];
 const data = {
-  name     : '@dpm/tool5',
+  name     : '@drpm/tool5',
   version  : '5.0.1',
-  tgz      : 'dpm-tool5-5.0.1.tgz',
+  tgz      : 'drpm-tool5-5.0.1.tgz',
   parentId : ''
 };
 

@@ -1,9 +1,9 @@
 import { Protocol, Web5 } from '@web5/api';
-import dpm from '../src/protocol.js';
+import drpm from '../src/protocol.js';
 
 async function configureProtocol(web5: Web5) {
   return await web5.dwn.protocols.configure({
-    message : { definition: dpm }
+    message : { definition: drpm }
   });
 
 }

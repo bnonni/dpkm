@@ -2,15 +2,26 @@
 
 <img src="/assets/img/animal/spider.webp" height=250 width=250 />
 
-Decentralized Registry Package Manager (DRPM) - a registry andpackage manager for the dWeb - like npm, but decentralized.
+Decentralized Registry Package Manager - npm for the DWeb. Build a DWA with DPKs using DRPM!
+
+## Vocabulary
+
+Acronyms galore! But what does it all mean!?
+
+* DID = Decentralized Identifier
+* DWN = Decentralized Web Node
+*
+* DPK = Decentralized Package
+* DRPM = Decentralized Registry Package Manager
+* DPI = Decentralized Package Import
 
 ## Summary
 
-DRPM is a package manager for interacting with decentralized packages (DPKs) published to Decentralized Web Nodes (DWNs). It leverages decentralized identifiers (DIDs) to lookup the DWN endpoint associated with that DID document and query DPKs stored at the `dpm` protocol path.
+DRPM is a set of tools using DIDs to manage DPKs within DWNs. It leverages the DID listed against the DPK to lookup the DID document using the DID method (which defines where the DID doc was stored, i.e.  which decentralized storage network). DRPM support two DID methods: DHT and WEB. The DID doc contains a "server" key containing as its value a list of objects. Each object defines a service available to that DID. In the case of DRPM, the service used is the DecentralizedWebNode service. This service object will contain a DWN endpoint. This endpoint is used to query the DWN for the DPK in question, which is stored using the DRPM DWN protocol. To view the protocol rules, checkout out [drpm.tools/protocols/drpm](https://drpm.tools/protocols/drpm).
 
-The goal of DPM is to decentralize package management putting control of the software in the hands of the users - not the manager. This ensures reliability by eliminating the possibility for broken links. With DPM, publishers write code to their DWNs and list it on [explorer.dpm.software](explorer.dpm.software).
+The goal of DRPM is to decentralize package management putting control of the software in the hands of the users - not the manager. This ensures reliability by eliminating the possibility for broken links. With DRPM, publishers write code to their DWNs and list it on [explorer.drpm.tools](https://explorer.drpm.tools).
 
-Developers can discover packages here just like npmjs.com, except explorer.dpm.sofware does not store the code, only offers publishers the ability to list it for discovery. The publishers store the code in their own DWNs and users can query, download and keep a copy of that code as immutable an source in their own DWN. This forever eliminates the possiblity for brokens links or censorship.
+Developers can discover packages here just like npmjs.com, except explorer.drpm.sofware does not store the code, only offers publishers the ability to list it for discovery. The publishers store the code in their own DWNs and users can query, download and keep a copy of that code as immutable an source in their own DWN. This forever eliminates the possiblity for brokens links or censorship.
 
 Npmjs packages are published under usernames or organization names. Devs can publish packages directly to npmjs under the package name and organizations can have an organization username (such as `@web5`) with a list of packages that under that org name. This paradigm is well known and understood but has a limited namespace resulting in gatekeeping, sniping or squatting.
 
@@ -20,13 +31,13 @@ Npmjs packages are published under usernames or organization names. Devs can pub
 * NPM Organization: [npmjs.com/org/web5](https://npmjs.com/org/web5)
 * NPM Package: [npmjs.com/package/tool5](npmjs.com/package/tool5)
 
-In DPM, packages are published to DWNs referenced by DIDs. Any entity can have a DID: user, org, device, etc. This unlimits the namespace and eliminates gatekeeping and censorship. DPM supports DHT method DIDs (for now). DOM resolves `did:dht` to the did document on the Mainline DHT network, which lists the dwn endpoints, and makes fetch requests to the DWN using the DMI to build DWN query URL.
+In DRPM, packages are published to DWNs referenced by DIDs. Any entity can have a DID: user, org, device, etc. This unlimits the namespace and eliminates gatekeeping and censorship. DRPM supports DHT method DIDs (for now). DOM resolves `did:dht` to the did document on the Mainline DHT network, which lists the dwn endpoints, and makes fetch requests to the DWN using the DMI to build DWN query URL.
 
 * DRPM User [did:dht:8w7ckznnw671az7nmkrd19ddctpj4spgt8sjqxkmnamdartxh1bo](https://nonni.org/.well-known/did)
 * DRPM Organization [did:web:drpm.tools](https://drpm.tools/.well-known/did.json)
 * DRPM Package [http://@drpm/did:dht:8w7ckznnw671az7nmkrd19ddctpj4spgt8sjqxkmnamdartxh1bo^5.0.0](http://nonni.org/did:dht:8w7ckznnw671az7nmkrd19ddctpj4spgt8sjqxkmnamdartxh1bo/query?filter.tags.name=tool5&filter.tags.version=1.1.2)
 
-## Decentralized Package Import (DPI)
+## Decentralized Package Import
 
 * DPIs are used to import code from locally installed DPKs
 
@@ -35,22 +46,22 @@ import express from '@drpm/express';
 const express = require('@drpm/express');
 ```
 
-## DRPM Register Hooks
+## Register Hooks
 
-The DRPM hook and register paradigm can be used to run one-off scripts without downloading the DPK into the `node_modules` folder. Check out [hooks.ts](/lib/hooks.ts) and [register.ts](/lib/register.ts).
+The DRPM register hooks paradigm can be used to run one-off scripts without downloading the DPK into the `node_modules` folder. Check out [hooks.ts](/lib/hooks.ts) and [register.ts](/lib/register.ts)
 
 ```shell
 npm run build
 node --import ./dist/esm/src/register.js ./path/to/your/script.js
 ```
 
-## DPM CLI
+## CLI
 
 TODO
 
-## DRPM Dependencies
+## Dependencies
 
-DRPM reuses the `package.json` and `package-lock.json` files for easy integration to the normal `npm` dev env. The same principals apply: the entries in each file ensure version locking and integrity hashing. This approach guarantees that packages are always accessible and versioned securely, enabling a more resilient and trustworthy ecosystem for software distribution.
+DRPM reuses the `package.json` and `package-lock.json` files for easy integration to the normal `npm` dev env. The same principals apply: the entries in each file ensure version locking and integrity hashing. This approach guarantees that packages are always accessible and versioned securely, enabling a more resilient and trustworthy ecosystem for software distribution
 
 * DRPM intercepts `npm install` and redirects the GET calls to a registry running on `localhost:2092`
 * This registry is a simple express server mimicing the paths used by npm to `GET` pacakges from `registry.npmjs.org`
@@ -68,7 +79,7 @@ DRPM reuses the `package.json` and `package-lock.json` files for easy integratio
 // package-lock.json example
 {
     "dependencies": {
-        "@dpm/express": "http://@drpm/express/did:dht:8w7ckznnw671az7nmkrd19ddctpj4spgt8sjqxkmnamdartxh1bo^4.21.1"
+        "@drpm/express": "http://@drpm/express/did:dht:8w7ckznnw671az7nmkrd19ddctpj4spgt8sjqxkmnamdartxh1bo^4.21.1"
     }
 }
 ```
@@ -78,7 +89,7 @@ DRPM reuses the `package.json` and `package-lock.json` files for easy integratio
 {
     "@drpm/express": {
         "version": "0.1.0",
-        "resolved": "http://@drpm/express/did:dht:8w7ckznnw671az7nmkrd19ddctpj4spgt8sjqxkmnamdartxh1bo^4.21.1"
+        "resolved": "http://@drpm/express/did:dht:8w7ckznnw671az7nmkrd19ddctpj4spgt8sjqxkmnamdartxh1bo^4.21.1",
         "integrity": "sha512-x/AIjFIKRllrhcb48dqUNAAZl0ig9+qMuN91RpZo3Cb2+zuibfh+KISl6+kVVyktDz230JKc208UkQwwMqyB+w==/VNCYsUA==",
         "license": "Apache-2.0"
     }

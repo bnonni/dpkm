@@ -3,7 +3,7 @@
 set -e
 
 REGISTRY_PID_FILE="registry.pid"
-REGISTRY_PROCESS_NAME="registry.dpm.software"
+REGISTRY_PROCESS_NAME="registry.drpm.tools"
 
 if [[ ! -f "$REGISTRY_PID_FILE" ]]; then
     echo "No registry process file"

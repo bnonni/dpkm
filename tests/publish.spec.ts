@@ -2,7 +2,7 @@ import { Web5 } from '@web5/api';
 import { createHash } from 'crypto';
 import { readFile } from 'fs/promises';
 import path from 'path';
-
+import drpm from '../src/protocol.js';
 const sync = '30s';
 const password = 'correct horse battery staple';
 const dwnEndpoints = ['http://localhost:3000'];
@@ -17,39 +17,7 @@ const { web5, did } = await Web5.connect({
 // const agent = web5.agent as Web5PlatformAgent;
 console.debug('did', did);
 
-const dpm = {
-  protocol  : 'https://test.dpm.software/protocol',
-  published : true,
-  types     : {
-    package : {
-      schema      : 'https://test.dpm.software/schema/package',
-      dataFormats : ['application/json', 'application/octet-stream'],
-    },
-  },
-  structure : {
-    package : {
-      $tags : {
-        name : {
-          type : 'string',
-        },
-        version : {
-          type : 'string',
-        },
-        integrity : {
-          type : 'string',
-        },
-      },
-      $actions : [
-        {
-          who : 'anyone',
-          can : ['read'],
-        },
-      ],
-    },
-  },
-};
-
-const { status: configure, protocol } = await web5.dwn.protocols.configure({ message: { definition: dpm }});
+const { status: configure, protocol } = await web5.dwn.protocols.configure({ message: { definition: drpm }});
 console.log('configure', configure);
 
 if (!protocol) {
@@ -84,9 +52,9 @@ const { record, status: create } = await web5.dwn.records.create({
   data    : { package: tgzFile },
   message : {
     dataFormat   : 'application/json',
-    schema       : dpm.types.package.schema,
+    schema       : drpm.types.package.schema,
     protocolPath : 'package',
-    protocol     : dpm.protocol,
+    protocol     : drpm.protocol,
     tags         : {
       name,
       version,
@@ -109,10 +77,10 @@ const { status: stat, records: recs = [] } = await web5.dwn.records.query({
   from    : did,
   message : {
     filter : {
-      schema       : dpm.types.package.schema,
+      schema       : drpm.types.package.schema,
       protocolPath : 'package',
       dataFormat   : 'application/json',
-      protocol     : dpm.protocol,
+      protocol     : drpm.protocol,
       tags         : {
         name    : 'tool5',
         version : '1.0.2',

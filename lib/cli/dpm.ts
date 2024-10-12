@@ -3,13 +3,14 @@ import { program } from 'commander';
 import { dpmInstall } from './install.js';
 import { dpmUninstall } from './uninstall.js';
 import { Logger } from '../utils/logger.js';
+import { dpmPublish } from './publish.js';
 
 // Install command
 program
   .command('install [packages...]')
   .command('i [packages...]')
   .command('add [packages...]')
-  .description('Install dpm and npm packages. You can pass any npm install flags.')
+  .description('Install DPKs')
   .allowUnknownOption()
   .action(async (args) => {
     const packages: string[] = [];
@@ -25,7 +26,7 @@ program
   .command('uninstall [packages...]')
   .command('u [packages...]')
   .command('remove [packages...]')
-  .description('Uninstall dpm and npm packages. You can pass any npm uninstall flags.')
+  .description('Uninstall DPKs')
   .allowUnknownOption()
   .action((args) => {
     const packages: string[] = [];
@@ -33,20 +34,14 @@ program
     args.filter((arg: string) => (arg.startsWith('-') || arg.startsWith('--'))
       ? flags.push(arg)
       : packages.push(arg));
-    dpmUninstall(packages, flags);
+    dpmUninstall(packages);
   });
 
-// Custom logic for publishing dpackages
-function dpmPublish() {
-  Logger.log('Executing custom publish logic...');
-  // Placeholder for custom publish logic
-  // ...
-}
 
 // Publish command
 program
   .command('publish')
-  .description('Publish the dpackage')
+  .description('Publish a DPK')
   .allowUnknownOption()
   .action((args) => {
     const packages: string[] = [];

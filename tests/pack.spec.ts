@@ -2,51 +2,19 @@ import { Web5 } from '@web5/api';
 import { createHash } from 'crypto';
 import * as tar from 'tar';
 import { pathExists, readJson } from 'fs-extra/esm';
-
+import drpm from '../src/protocol.js';
 import path from 'path';
 import { readdir, readFile } from 'fs/promises';
 const packageDir = process.cwd();
 const password = 'correct horse battery staple';
 const dwnEndpoints = ['http://localhost:3000'];
-const dpm = {
-  protocol  : 'https://test.dpm.software/protocol',
-  published : true,
-  types     : {
-    package : {
-      schema      : 'https://test.dpm.software/schema/package',
-      dataFormats : ['application/gzip'],
-    },
-  },
-  structure : {
-    package : {
-      $tags : {
-        name : {
-          type : 'string',
-        },
-        version : {
-          type : 'string',
-        },
-        integrity : {
-          type : 'string',
-        },
-        $requiredTags : ['name', 'version', 'integrity'],
-      },
-      $actions : [
-        {
-          who : 'anyone',
-          can : ['read'],
-        },
-      ],
-    },
-  },
-};
 
 async function web5Connect() {
   return await Web5.connect({ password, sync: '30s', techPreview: { dwnEndpoints }, didCreateOptions: { dwnEndpoints } });
 }
 
 async function configureDpmProtocol(web5: Web5, did: string) {
-  const { status: configure, protocol } = await web5.dwn.protocols.configure({ message: { definition: dpm } });
+  const { status: configure, protocol } = await web5.dwn.protocols.configure({ message: { definition: drpm } });
 
   console.log('Configured DPM protocol', configure);
 
@@ -112,9 +80,9 @@ async function createDpmRecord(web5: Web5, did: string, { name, version, dpackag
     message : {
       published    : true,
       dataFormat   : 'application/json',
-      schema       : dpm.types.package.schema,
+      schema       : drpm.types.package.schema,
       protocolPath : 'package',
-      protocol     : dpm.protocol,
+      protocol     : drpm.protocol,
       tags         : {
         name,
         version,
@@ -135,12 +103,12 @@ async function queryDpmRecords() {
     from    : did,
     message : {
       filter : {
-        schema       : dpm.types.package.schema,
+        schema       : drpm.types.package.schema,
         protocolPath : 'package',
         dataFormat   : 'application/json',
-        protocol     : dpm.protocol,
+        protocol     : drpm.protocol,
         tags         : {
-          name    : 'tool5',
+          name    : '@drpm/tool5',
           version : '1.0.2',
         },
       },

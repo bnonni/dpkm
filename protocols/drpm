@@ -1,5 +1,5 @@
 {
-    "protocol": "https://dpm.software/protocols/dpm",
+    "protocol": "https://drpm.tools/protocols/drpm",
     "published": true,
     "types": {
         "package": {
@@ -18,7 +18,7 @@
         "release": {
             "schema": "https://www.rfc-editor.org/rfc/rfc1952.html",
             "dataFormats": [
-                "application/gzip"
+                "application/octet-stream"
             ]
         },
         "admin": {

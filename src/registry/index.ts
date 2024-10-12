@@ -3,7 +3,7 @@
 import cors from 'cors';
 import express, { Request, Response } from 'express';
 import { ensureDir } from 'fs-extra';
-import { fetchDPK } from '../dpm.js';
+import { fetchDPK } from '../dpk.js';
 import { ResponseUtils } from '../utils/dwn.js';
 import { Logger } from '../utils/logger.js';
 import { REGISTRY_DIR } from './config.js';
@@ -30,12 +30,12 @@ app.use((req, _, next) => {
 });
 
 app.get('/', (_: Request, res: Response) => {
-  Logger.log('http://registry.dpm.software.local => { ok: true }');
+  Logger.log('http://registry.drpm.tools.local => { ok: true }');
   res.status(200).json({ ok: true });
 });
 
 app.get('/health', (_: Request, res: Response) => {
-  Logger.log('http://registry.dpm.software.local/health => { ok: true }');
+  Logger.log('http://registry.drpm.tools.local/health => { ok: true }');
   res.status(200).json({ ok: true });
 });
 
@@ -70,7 +70,7 @@ app.get('/:scope/:name/:didVersion', async (req: Request, res: Response) => {
     }
     res.status(200).json(metadata);
   } catch (error: any) {
-    Logger.error('GET /@dpm/:name/:did/:version - error fetching DPK', error);
+    Logger.error('GET /@drpm/:name/:did/:version - error fetching DPK', error);
     res.status(500).json(errorJson);
   }
 });

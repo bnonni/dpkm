@@ -15,18 +15,18 @@ NPMRC=".npmrc"
 GLOBAL_NPMRC="$HOME/$NPMRC"
 LOCAL_NPMRC="$PWD/$NPMRC"
 NPMRC_FILES=("$GLOBAL_NPMRC" "$LOCAL_NPMRC")
-DPM_HOME="$HOME/.dpm"
+DRPM_HOME="$HOME/.drpm"
 
-# Initialize global dpm variables
+# Initialize global DRPM variables
 REGISTRY_URL="http://localhost:2092"
 REGISTRY_PID_FILE="registry.pid"
-REGISTRY_PROCESS_NAME="registry.dpm.software"
+REGISTRY_PROCESS_NAME="registry.drpm.tools"
 REGISTRY_PID=0
-PREFIXES=("@dpm:registry=$REGISTRY_URL" "@dpk:registry=$REGISTRY_URL" "dpm:registry=$REGISTRY_URL" "dpk:registry=$REGISTRY_URL")
+PREFIXES=("@drpm:registry=$REGISTRY_URL" "@dpk:registry=$REGISTRY_URL" "drpm:registry=$REGISTRY_URL" "dpk:registry=$REGISTRY_URL")
 MISSING_PREFIXES=()
 
-# Create the DPM home directory if it doesn't exist
-[[ ! -d "$DPM_HOME" ]] && mkdir "$DPM_HOME" || echo "Skipping mkdir DPM_HOME ($DPM_HOME) ..."
+# Create the DRPM home directory if it doesn't exist
+[[ ! -d "$DRPM_HOME" ]] && mkdir "$DRPM_HOME" || echo "Skipping mkdir DRPM_HOME ($DRPM_HOME) ..."
 
 # Function to handle unsupported OS and exit
 unsupported_os() {
@@ -82,7 +82,7 @@ setup_nginx() {
 backup_file() {
     local FILE_TO_BAK="$1"
     if [[ -f "$FILE_TO_BAK" ]]; then
-        BAK_FILE="$DPM_HOME/$(basename "$FILE_TO_BAK").bak"
+        BAK_FILE="$DRPM_HOME/$(basename "$FILE_TO_BAK").bak"
         echo "Backing up $FILE_TO_BAK to $BAK_FILE"
         cp "$FILE_TO_BAK" "$BAK_FILE"
     fi
@@ -113,7 +113,7 @@ find_missing_prefixes() {
 
 # Function to prompt for global installation
 prompt_global_npmrc_install() {
-    read -p "Would you like to add the DPM registries to global .npmrc ($GLOBAL_NPMRC)? [y/N] " ANSWER
+    read -p "Would you like to add the DRPM registries to global .npmrc ($GLOBAL_NPMRC)? [y/N] " ANSWER
     [[ "$ANSWER" =~ ^[yY]$ ]] && GLOBAL_FLAG=true
 }
 
@@ -155,8 +155,8 @@ do_check_and_install_npmrc() {
     add_prefixes_to_npmrc "$NPMRC_FILE" "${MISSING_PREFIXES[@]}"
 }
 
-# Function to start the DPM registry if not running
-start_dpm_registry() {
+# Function to start the DRPM registry if not running
+start_drpm_registry() {
     REGISTRY_PID="$(cat $REGISTRY_PID_FILE 2>/dev/null || pgrep -f $REGISTRY_PROCESS_NAME || ps aux | grep $REGISTRY_PROCESS_NAME | awk '{print $2}' || lsof -i :2092 | grep node | awk '{print $2}')"
     if [[ -z "$REGISTRY_PID" ]]; then
         echo "Starting registry ..."
@@ -177,7 +177,7 @@ start_dpm_registry() {
 
 # Function to edit /etc/hosts
 edit_hosts() {
-    CUSTOM_DOMAIN="127.0.0.1 registry.dpm.software.local"
+    CUSTOM_DOMAIN="127.0.0.1 registry.drpm.tools.local"
     read -p "Please enter your password: " -s PASSWORD
     if ! grep -q "$CUSTOM_DOMAIN" /etc/hosts; then
         echo "$PASSWORD" | sudo -S sh -c "echo \"$CUSTOM_DOMAIN\" >> /etc/hosts"
@@ -188,7 +188,7 @@ edit_hosts() {
 }
 
 # Function to set up environment variables
-setup_dpm_env_vars() {
+setup_drpm_env_vars() {
     case "$SHELL" in
         */zsh)
             SHELL_RC="$HOME/.zshrc"
@@ -204,7 +204,7 @@ setup_dpm_env_vars() {
     echo "Found $SHELL_RC file, adding env vars ..."
     [[ -s "$SHELL_RC" && $(tail -c1 "$SHELL_RC" | wc -l) -eq 0 ]] && echo >> "$SHELL_RC"
 
-    local VARS_TO_EXPORT=("DPM_HOME=\"$DPM_HOME\"" "REGISTRY_URL=\"$REGISTRY_URL\"" "REGISTRY_PID_FILE=\"$REGISTRY_PID_FILE\"" "REGISTRY_PROCESS_NAME=\"$REGISTRY_PROCESS_NAME\"" "PATH=\"$DPM_HOME:$PATH\"")
+    local VARS_TO_EXPORT=("DRPM_HOME=\"$DRPM_HOME\"" "REGISTRY_URL=\"$REGISTRY_URL\"" "REGISTRY_PID_FILE=\"$REGISTRY_PID_FILE\"" "REGISTRY_PROCESS_NAME=\"$REGISTRY_PROCESS_NAME\"" "PATH=\"$DRPM_HOME:$PATH\"")
 
     for VAR in "${VARS_TO_EXPORT[@]}"; do
         if ! grep -q "$VAR" "$SHELL_RC"; then
@@ -212,7 +212,7 @@ setup_dpm_env_vars() {
         fi
     done
 
-    echo "DPM env vars added to $SHELL_RC"
+    echo "DRPM env vars added to $SHELL_RC"
 
     if [[ "$0" != "$BASH_SOURCE" ]]; then
         echo "Attempting to source $SHELL_RC ..."
@@ -249,6 +249,6 @@ fi
 $NGINX_FLAG && setup_nginx "$OS" || echo "Skipping Nginx setup ..."
 
 edit_hosts
-start_dpm_registry
-setup_dpm_env_vars
+start_drpm_registry
+setup_drpm_env_vars
 exit 0

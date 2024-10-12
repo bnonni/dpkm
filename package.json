@@ -1,15 +1,19 @@
 {
-  "name": "dpm",
+  "name": "drpm",
   "version": "0.1.0",
   "type": "module",
-  "description": "Decentralized Package Manager (DPM)(디피엠) leverages decentralized identifiers (DIDs) to reference software packages stored on the DWeb as a record in the publisher's Decentralized Web Node (DWN)",
+  "description": "Decentralized Registry Package Manager Monorepo (DPM)(디피엠) contains tools for interacting with the DWeb. DRPM tools leverage decentralized identifiers (DIDs) to reference decentralized packages stored in a Decentralized Web Node (DWN).",
   "directories": {
-    "doc": "docs"
+    "docs": "./docs",
+    "protocols": "./protocols",
+    "scripts": "./scripts",
+    "lib": "./lib",
+    "build": "./build"
   },
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/types/index.d.ts",
-  "bin": "./dist/esm/cli/dpm.js",
+  "bin": "./dist/esm/cli/drpm.js",
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
@@ -30,18 +34,18 @@
     "pid:registry": "sh scripts/registry.pid.sh",
     "kill:registry": "sh scripts/registry.kill.sh",
     "prepare": "npm run build",
-    "postinstall": "sudo sh ./scripts/postinstall.sh",
+    "postinstall": "sh ./scripts/postinstall.sh",
     "dev": "nodemon",
-    "docker:build": "docker build -t dpm-registry .",
-    "docker:run": "docker run -d -p 2092:2092 --name dpm-registry-container dpm-registry"
+    "docker:build": "docker build -t drpm-registry .",
+    "docker:run": "docker run -d -p 2092:2092 --name drpm-registry-container drpm-registry"
   },
-  "homepage": "https://dpm.software",
+  "homepage": "https://drpm.tools",
   "bugs": {
-    "url": "https://github.com/bnonni/dpm/issues"
+    "url": "https://github.com/bnonni/drpm/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/bnonni/dpm.git"
+    "url": "git+ssh://git@github.com/bnonni/drpm.git"
   },
   "license": "Apache-2.0",
   "contributors": [
@@ -59,18 +63,28 @@
     "src"
   ],
   "keywords": [
+    "decentralized registry package manager",
+    "decentralized registry package",
+    "decentralized registry",
+    "decentralized registry",
+    "decentralized package registry",
+    "decentralized manager",
+    "decentralized package manager",
     "decentralized",
     "decentralized-applications",
     "decentralized-identity",
     "decentralized-web",
     "web5",
-    "decentralized package manager",
     "dpm",
+    "drpm",
     "package manager",
     "dwn",
     "dweb node",
     "decentralized web node",
-    "dwn protocol"
+    "dwn protocol",
+    "decentralized identifiers",
+    "dids",
+    "decentralized package imports"
   ],
   "publishConfig": {
     "access": "public"
@@ -85,8 +99,7 @@
     "cors": "^2.8.5",
     "express": "^4.21.0",
     "fs-extra": "^11.2.0",
-    "tar": "^7.4.3",
-    "@dpm/tool5": "http://localhost:2092/@dpm/tool5/did:dht:8w7ckznnw671az7nmkrd19ddctpj4spgt8sjqxkmnamdartxh1bo^5.0.1"
+    "tar": "^7.4.3"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.5",

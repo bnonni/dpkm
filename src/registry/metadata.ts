@@ -80,7 +80,7 @@ export default {
       'dist'         : {
         'integrity'    : 'sha512-gPClNFHEACDPrNPIY9nQ5CtgNzXLek1VKLkenI/RRKrrWSSyIVte0HloLzyQJFW0bXgFnv5TgtcUM+xHE7B6/w==',
         'shasum'       : 'dc12d542e446ae3025101bc3de6c0fb5886a8a49',
-        'tarball'      : 'http://localhost:2092/@dpm/tool5/did:dht:8w7ckznnw671az7nmkrd19ddctpj4spgt8sjqxkmnamdartxh1bo^5.0.1/-/tool5-5.0.1.tgz',
+        'tarball'      : 'http://localhost:2092/@drpm/tool5/did:dht:8w7ckznnw671az7nmkrd19ddctpj4spgt8sjqxkmnamdartxh1bo^5.0.1/-/tool5-5.0.1.tgz',
         'fileCount'    : 95,
         'unpackedSize' : 115474,
         'signatures'   : [
