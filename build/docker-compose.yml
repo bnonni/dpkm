@@ -1,15 +1,15 @@
 version: '3'
 services:
-  drpm-registry:
+  registry-drpm:
     build: .
-    container_name: drpm-registry-container
+    container_name: registry-drpm-container
     ports:
       - "2092:2092"
     networks:
-      - dpm_network
+      - drpm_network
     environment:
-      - VIRTUAL_HOST=registry.drpm.software.local
+      - VIRTUAL_HOST=registry.drpm.tools.local
 
 networks:
-  dpm_network:
+  drpm_network:
     driver: bridge

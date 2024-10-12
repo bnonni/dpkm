@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "rootDir": "./src",
+    "rootDir": "packages/common/src/src",
     "allowJs": false,
     "strict": true,
     "declaration": true,
