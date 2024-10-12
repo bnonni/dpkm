@@ -1,5 +1,5 @@
 {
-  "name": "@drpm/registryd",
+  "name": "@drpm/drg",
   "version": "0.1.0",
   "description": "Decentralized Registry - contains code for running the registryd",
   "directories": {

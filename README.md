@@ -8,12 +8,24 @@ Decentralized Registry Package Manager - npm for the DWeb. Build a DWA with DPKs
 
 Acronyms galore! But what does it all mean!?
 
+### Web5 Vocab
+
 * DID = Decentralized Identifier
 * DWN = Decentralized Web Node
-*
-* DPK = Decentralized Package
+
+### DRPM Vocab
+
+* DRG / DReg = Decentralized Registry
+* DPK / DPak = Decentralized Package
+* DPM / DPakMan = Decentralized Package Manager
 * DRPM = Decentralized Registry Package Manager
-* DPI = Decentralized Package Import
+* DMI / DMod = Decentralized Module Import
+* DPI / DPakI = Decentralized Package Import - different name for DMI
+
+### Other Vocab
+
+* NPK = Node Package
+* NPM = Node Package Manager
 
 ## Summary
 
