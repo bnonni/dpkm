@@ -4,29 +4,43 @@
 
 Decentralized Registry Package Manager - npm for the DWeb. Publish a Decentralized Package to your Decentralized Web Node using DRPM!
 
+## Table of Contents
+
+- [Vocabulary](#vocabulary)
+  - [Web5 Vocab](#web5-vocab)
+  - [DRPM Vocab](#drpm-vocab)
+  - [Other Vocab](#other-vocab)
+- [Summary](#summary)
+- [Namespace](#namespace)
+- [Decentralized Package Import](#decentralized-package-import)
+- [Register Hooks](#register-hooks)
+- [CLI](#cli)
+- [Dependencies](#dependencies)
+- [Project Resources](#project-resources)
+
 ## Vocabulary
 
 Acronyms galore! But what does it all mean!?
 
 ### Web5 Vocab
 
-* DID = Decentralized Identifier
-* DWN = Decentralized Web Node
-* DWA = Decentralized Web App
+- DID = Decentralized Identifier
+- DWN = Decentralized Web Node
+- DWA = Decentralized Web App
 
 ### DRPM Vocab
 
-* DRG / DReg = Decentralized Registry
-* DPK / DPak = Decentralized Package
-* DPM / DPakMan = Decentralized Package Manager
-* DRPM = Decentralized Registry Package Manager
-* DMI / DMod = Decentralized Module Import
-* DPI / DPakI = Decentralized Package Import - different name for DMI
+- DRG / DReg = Decentralized Registry
+- DPK / DPak = Decentralized Package
+- DPM / DPakMan = Decentralized Package Manager
+- DRPM = Decentralized Registry Package Manager
+- DMI / DMod = Decentralized Module Import
+- DPI / DPakI = Decentralized Package Import - different name for DMI
 
 ### Other Vocab
 
-* NPK = Node Package
-* NPM = Node Package Manager
+- NPK = Node Package
+- NPM = Node Package Manager
 
 ## Summary
 
@@ -38,21 +52,21 @@ Developers can discover packages here just like npmjs.com, except explorer.drpm.
 
 Npmjs packages are published under usernames or organization names. Devs can publish packages directly to npmjs under the package name and organizations can have an organization username (such as `@web5`) with a list of packages that under that org name. This paradigm is well known and understood but has a limited namespace resulting in gatekeeping, sniping or squatting.
 
-### Namespace
+## Namespace
 
-* NPM User [npmjs.com/~bnonni](https://npmjs.com/~bnonni)
-* NPM Organization: [npmjs.com/org/web5](https://npmjs.com/org/web5)
-* NPM Package: [npmjs.com/package/tool5](npmjs.com/package/tool5)
+- NPM User [npmjs.com/~bnonni](https://npmjs.com/~bnonni)
+- NPM Organization: [npmjs.com/org/web5](https://npmjs.com/org/web5)
+- NPM Package: [npmjs.com/package/tool5](npmjs.com/package/tool5)
 
 In DRPM, packages are published to DWNs referenced by DIDs. Any entity can have a DID: user, org, device, etc. This unlimits the namespace and eliminates gatekeeping and censorship. DRPM supports DHT method DIDs (for now). DOM resolves `did:dht` to the did document on the Mainline DHT network, which lists the dwn endpoints, and makes fetch requests to the DWN using the DMI to build DWN query URL.
 
-* DRPM User [did:dht:8w7ckznnw671az7nmkrd19ddctpj4spgt8sjqxkmnamdartxh1bo](https://nonni.org/.well-known/did)
-* DRPM Organization [did:web:drpm.tools](https://drpm.tools/.well-known/did.json)
-* DRPM Package [http://@drpm/did:dht:8w7ckznnw671az7nmkrd19ddctpj4spgt8sjqxkmnamdartxh1bo^5.0.0](http://nonni.org/did:dht:8w7ckznnw671az7nmkrd19ddctpj4spgt8sjqxkmnamdartxh1bo/query?filter.tags.name=tool5&filter.tags.version=1.1.2)
+- DRPM User [did:dht:8w7ckznnw671az7nmkrd19ddctpj4spgt8sjqxkmnamdartxh1bo](https://nonni.org/.well-known/did)
+- DRPM Organization [did:web:drpm.tools](https://drpm.tools/.well-known/did.json)
+- DRPM Package [http://@drpm/did:dht:8w7ckznnw671az7nmkrd19ddctpj4spgt8sjqxkmnamdartxh1bo^5.0.0](http://nonni.org/did:dht:8w7ckznnw671az7nmkrd19ddctpj4spgt8sjqxkmnamdartxh1bo/query?filter.tags.name=tool5&filter.tags.version=1.1.2)
 
 ## Decentralized Package Import
 
-* DPIs are used to import code from locally installed DPKs
+- DPIs are used to import code from locally installed DPKs
 
 ```ts
 import express from '@drpm/express';
@@ -76,17 +90,17 @@ TODO
 
 DRPM reuses the `package.json` and `package-lock.json` files for easy integration to the normal `npm` dev env. The same principals apply: the entries in each file ensure version locking and integrity hashing. This approach guarantees that packages are always accessible and versioned securely, enabling a more resilient and trustworthy ecosystem for software distribution
 
-* DRPM intercepts `npm install` and redirects the GET calls to a registry running on `localhost:2092`
-* This registry is a simple express server mimicing the paths used by npm to `GET` pacakges from `registry.npmjs.org`
-* The express server parses API url path to construct a DRL (Decentralized Resource Locator)
-* DRPM requests the DPK from the DWN found in the DID doc assocaigted with the DID from the dependency version string
-* The registry server installs the DPK metadata and tarball into a local folder called `.registry` and passes the path to the tarball back to the `npm install` cli call
-* From there, `npm` handles the rest normally installing the tarball into `node_modules` under `@drpm/{packageName}/{version}`
-* Integrity hashes are produced using the DPK.tgz content ensuring the publisher cannot swap out code under a specific verion in the protocol path.
-* Additionally, DRPM allows developers to republish the code pulled from the remote DWN to their own DWN forever allowing them to secure an immutable copy
-* Once a release is published and copied to your own DWN, it can only be changed by the DWN owner.
-* To see the custom registry server, check out [/src/registry/index.ts](/src/registry/index.ts)
-* See below for examples entries in `package.json` and `package-lock.json`
+- DRPM intercepts `npm install` and redirects the GET calls to a registry running on `localhost:2092`
+- This registry is a simple express server mimicing the paths used by npm to `GET` pacakges from `registry.npmjs.org`
+- The express server parses API url path to construct a DRL (Decentralized Resource Locator)
+- DRPM requests the DPK from the DWN found in the DID doc assocaigted with the DID from the dependency version string
+- The registry server installs the DPK metadata and tarball into a local folder called `.registry` and passes the path to the tarball back to the `npm install` cli call
+- From there, `npm` handles the rest normally installing the tarball into `node_modules` under `@drpm/{packageName}/{version}`
+- Integrity hashes are produced using the DPK.tgz content ensuring the publisher cannot swap out code under a specific verion in the protocol path.
+- Additionally, DRPM allows developers to republish the code pulled from the remote DWN to their own DWN forever allowing them to secure an immutable copy
+- Once a release is published and copied to your own DWN, it can only be changed by the DWN owner.
+- To see the custom registry server, check out [/src/registry/index.ts](/src/registry/index.ts)
+- See below for examples entries in `package.json` and `package-lock.json`
 
 ```json
 // package-lock.json example
