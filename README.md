@@ -30,12 +30,12 @@ Acronyms galore! But what does it all mean!?
 
 ### DRPM Vocab
 
-- DRG / DReg = Decentralized Registry
-- DPK / DPak = Decentralized Package
-- DPM / DPakMan = Decentralized Package Manager
+- DRG = Decentralized Registry
+- DPK = Decentralized Package
+- DPM = Decentralized Package Manager
 - DRPM = Decentralized Registry Package Manager
-- DMI / DMod = Decentralized Module Import
-- DPI / DPakI = Decentralized Package Import - different name for DMI
+- DMI = Decentralized Module Import
+- DPI = Decentralized Package Import - different name for DMI
 
 ### Other Vocab
 
@@ -63,6 +63,15 @@ In DRPM, packages are published to DWNs referenced by DIDs. Any entity can have 
 - DRPM User [did:dht:8w7ckznnw671az7nmkrd19ddctpj4spgt8sjqxkmnamdartxh1bo](https://nonni.org/.well-known/did)
 - DRPM Organization [did:web:drpm.tools](https://drpm.tools/.well-known/did.json)
 - DRPM Package [http://@drpm/did:dht:8w7ckznnw671az7nmkrd19ddctpj4spgt8sjqxkmnamdartxh1bo^5.0.0](http://nonni.org/did:dht:8w7ckznnw671az7nmkrd19ddctpj4spgt8sjqxkmnamdartxh1bo/query?filter.tags.name=tool5&filter.tags.version=1.1.2)
+
+## Monorepo
+
+This monorepo contains 4 different developer tools; each providing distinct and important functionality:
+
+- [/packages/dpm](/packages/dpm/README.md) = an easy-to use CLI for performing certain actions that fall outside the capabilities of npm
+- [/packages/dpk](/packages/dpk/README.md) = core primitive providing the ability to install and manage DPKs, use DPIs & build and publish DPKs
+- [/packages/drg](/packages/drg/README.md) = new primitive to leverage dpk by running a local DRG for interacting with DIDs, DWNs & DPKs
+- [/packages/common](/packages/common/README.md) = a library of utilities used by dpm, dpk and drg
 
 ## Decentralized Package Import
 
