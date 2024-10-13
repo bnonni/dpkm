@@ -1,5 +1,5 @@
-title: Decentralized Package Manager (DPM)
-logo: /docs/img/logo/tan/profile.jpg
-description: A package manager for the dWeb, like npm but decentralized.
+title: Decentralized Registry Package Manager (DPM)
+logo: /assets/img/animal/wolf.webp
+description: npm for the DWeb. Publish a Decentralized Package to your Decentralized Web Node using DRPM!
 include:
   - .well-known

@@ -1,7 +1,7 @@
 {
   "name": "@drpm/drg",
   "version": "0.1.0",
-  "description": "Decentralized Registry - contains code for running the registryd",
+  "description": "Decentralized Registry (DRG) - a new Web5 primitive that leverages `@drpm/dpk` to run a local DRG for interacting with DIDs, DWNs & DPKs",
   "directories": {
     "docs": "./docs",
     "protocols": "./protocols",
@@ -35,8 +35,8 @@
     "prepare": "npm run build",
     "postinstall": "sh ./scripts/postinstall.sh",
     "dev": "nodemon",
-    "docker:build": "docker build -t registry-drpm .",
-    "docker:run": "docker run -d -p 2092:2092 --name registry-drpm-container registry-drpm"
+    "docker:build": "docker build -t registryd .",
+    "docker:run": "docker run -d -p 2092:2092 --name registryd-container registryd"
   },
   "homepage": "https://drpm.tools",
   "bugs": {
