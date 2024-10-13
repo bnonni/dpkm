@@ -1,0 +1,3 @@
+# @drpm/dpk
+
+Decentralized Package

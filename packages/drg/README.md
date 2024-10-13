@@ -1,0 +1,3 @@
+# @drpm/registryd
+
+Decentralized Registry

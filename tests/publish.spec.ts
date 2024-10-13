@@ -2,7 +2,7 @@ import { Web5 } from '@web5/api';
 import { createHash } from 'crypto';
 import { readFile } from 'fs/promises';
 import path from 'path';
-import drpm from '../src/protocol.js';
+import drpm from '../packages/common/src/protocol.js';
 const sync = '30s';
 const password = 'correct horse battery staple';
 const dwnEndpoints = ['http://localhost:3000'];

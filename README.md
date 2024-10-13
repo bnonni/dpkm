@@ -1,23 +1,36 @@
 # Decentralized Registry Package Manager
 
-<img src="/assets/img/animal/spider.webp" height=250 width=250 />
+<img src="/assets/img/animal/wolf.webp" height=250 width=250 />
 
-Decentralized Registry Package Manager - npm for the DWeb. Build a DWA with DPKs using DRPM!
+Decentralized Registry Package Manager - npm for the DWeb. Publish a Decentralized Package to your Decentralized Web Node using DRPM!
 
 ## Vocabulary
 
 Acronyms galore! But what does it all mean!?
 
+### Web5 Vocab
+
 * DID = Decentralized Identifier
 * DWN = Decentralized Web Node
-*
-* DPK = Decentralized Package
+* DWA = Decentralized Web App
+
+### DRPM Vocab
+
+* DRG / DReg = Decentralized Registry
+* DPK / DPak = Decentralized Package
+* DPM / DPakMan = Decentralized Package Manager
 * DRPM = Decentralized Registry Package Manager
-* DPI = Decentralized Package Import
+* DMI / DMod = Decentralized Module Import
+* DPI / DPakI = Decentralized Package Import - different name for DMI
+
+### Other Vocab
+
+* NPK = Node Package
+* NPM = Node Package Manager
 
 ## Summary
 
-DRPM is a set of tools using DIDs to manage DPKs within DWNs. It leverages the DID listed against the DPK to lookup the DID document using the DID method (which defines where the DID doc was stored, i.e.  which decentralized storage network). DRPM support two DID methods: DHT and WEB. The DID doc contains a "server" key containing as its value a list of objects. Each object defines a service available to that DID. In the case of DRPM, the service used is the DecentralizedWebNode service. This service object will contain a DWN endpoint. This endpoint is used to query the DWN for the DPK in question, which is stored using the DRPM DWN protocol. To view the protocol rules, checkout out [drpm.tools/protocols/drpm](https://drpm.tools/protocols/drpm).
+DRPM is a set of tools using DIDs to publish, install, and interact with DPKs published to a DWN. Every DID created has a DID Document containing relevant information for how to interact with that DID. In the case of DRPM, we are leveraging the `serverhe DID listed against the DPK to lookup the DID document using the DID method (which defines where the DID doc was stored, i.e.  which decentralized storage network). DRPM support two DID methods: DHT and WEB. The DID doc contains a "server" key containing as its value a list of objects. Each object defines a service available to that DID. In the case of DRPM, the service used is the DecentralizedWebNode service. This service object will contain a DWN endpoint. This endpoint is used to query the DWN for the DPK in question, which is stored using the DRPM DWN protocol. To view the protocol rules, checkout out [drpm.tools/protocols/drpm](https://drpm.tools/protocols/drpm).
 
 The goal of DRPM is to decentralize package management putting control of the software in the hands of the users - not the manager. This ensures reliability by eliminating the possibility for broken links. With DRPM, publishers write code to their DWNs and list it on [explorer.drpm.tools](https://explorer.drpm.tools).
 

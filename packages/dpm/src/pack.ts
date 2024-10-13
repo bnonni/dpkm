@@ -2,7 +2,7 @@ import { Web5 } from '@web5/api';
 import { createHash } from 'crypto';
 import * as tar from 'tar';
 import { pathExists, readJson } from 'fs-extra/esm';
-import drpm from '../packages/common/src/protocol.js';
+import drpm from '../../common/src/protocol.js';
 import path from 'path';
 import { readdir, readFile } from 'fs/promises';
 const packageDir = process.cwd();
@@ -10,11 +10,11 @@ const password = 'correct horse battery staple';
 const dwnEndpoints = ['http://localhost:3000'];
 
 async function web5Connect() {
-  return await Web5.connect({ password, sync: '30s', techPreview: { dwnEndpoints }, didCreateOptions: { dwnEndpoints } });
+  return await Web5.connect({ password, sync: 'off', techPreview: { dwnEndpoints }, didCreateOptions: { dwnEndpoints } });
 }
 
 async function configureDpmProtocol(web5: Web5, did: string) {
-  const { status: configure, protocol } = await web5.dwn.protocols.configure({ message: { definition: drpm } });
+  const { status: configure, protocol } = await web5.dwn.protocols.configure({ message: { definition: dpm } });
 
   console.log('Configured DPM protocol', configure);
 
@@ -108,7 +108,7 @@ async function queryDpmRecords() {
         dataFormat   : 'application/json',
         protocol     : drpm.protocol,
         tags         : {
-          name    : '@drpm/tool5',
+          name    : 'tool5',
           version : '1.0.2',
         },
       },

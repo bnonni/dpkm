@@ -6,8 +6,8 @@
     "sourceMap": true,
   },
   "include": [
-    "../src",
-    ".",
+    "../packages/common/src/src",
+    ".", "../packages/registryd/src/bin", "../packages/registryd/config.ts", "../packages/registryd/index.ts", "../packages/registryd/metadata.ts", "../packages/registryd/utils.ts", "../packages/dpk/src/dpk.ts../packages/common/src/src/utilstils", "../packages/common/src/dph.ts", "../packages/common/src/dwn.ts", "../packages/common/src/logger.ts", "../packages/common/src/types.ts", "../packages/common/src/index.ts", "../packages/common/src/protocol.ts",
   ],
   "exclude": [
     "./compiled"
