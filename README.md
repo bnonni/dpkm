@@ -11,6 +11,7 @@ Decentralized Registry Package Manager - npm for the DWeb. Publish a Decentraliz
   - [DRPM Vocab](#drpm-vocab)
   - [Other Vocab](#other-vocab)
 - [Summary](#summary)
+- [Monorepo](#monorepo)
 - [Namespace](#namespace)
 - [Decentralized Package Import](#decentralized-package-import)
 - [Register Hooks](#register-hooks)

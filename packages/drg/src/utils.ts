@@ -6,7 +6,7 @@ import { join } from 'path';
 import { DPM_REGISTRY, REGISTRY_DIR } from './config.js';
 import { pipeline } from 'stream/promises';
 import { createHash } from 'crypto';
-import { Logger } from '../../src/utils/logger.js';
+import { Logger } from '@drpm/common';
 
 export async function sha512Integrity(tgzFilepath: string): Promise<string> {
   const fileBuffer = await readFile(tgzFilepath);

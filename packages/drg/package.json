@@ -2,41 +2,37 @@
   "name": "@drpm/drg",
   "version": "0.1.0",
   "description": "Decentralized Registry (DRG) - a new Web5 primitive that leverages `@drpm/dpk` to run a local DRG for interacting with DIDs, DWNs & DPKs",
+  "type": "module",
   "directories": {
-    "docs": "./docs",
-    "protocols": "./protocols",
-    "scripts": "./scripts",
-    "lib": "./lib",
-    "build": "./build"
+    "src": "./src"
   },
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/types/index.d.ts",
-  "bin": "./dist/esm/cli/drpm.js",
   "exports": {
     ".": {
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.js"
     },
     "./package.json": "./package.json"
   },
   "scripts": {
+    "dev": "nodemon",
     "clean": "rimraf dist coverage tests/compiled",
     "wipe": "rimraf node_modules package-lock.json",
     "build:tests": "npm run build && tsc -p tests/tsconfig.json",
-    "test:register-hooks": "npm run build:tests; node --import ./dist/esm/src/register.js ./tests/compiled/tests/register-hooks.spec.js",
     "build": "npm run build:cjs && npm run build:esm",
     "build:cjs": "rimraf dist/cjs && tsc -p tsconfig.cjs.json && echo '{\"type\": \"commonjs\"}' > ./dist/cjs/package.json",
-    "build:esm": "rimraf dist/esm dist/types && tsc -p tsconfig.esm.json",
-    "start:registryd": "node ./dist/esm/registryd/bin/www.js",
-    "nohup:registryd": "sh scripts/registryd.nohup.sh",
-    "pid:registryd": "sh scripts/registryd.pid.sh",
-    "kill:registryd": "sh scripts/registryd.kill.sh",
-    "prepare": "npm run build",
-    "postinstall": "sh ./scripts/postinstall.sh",
-    "dev": "nodemon",
-    "docker:build": "docker build -t registryd .",
-    "docker:run": "docker run -d -p 2092:2092 --name registryd-container registryd"
+    "build:esm": "rimraf dist/esm dist/types && tsc -p tsconfig.json",
+    "start:dregistry": "node ./dist/esm/dregistry/bin/www.js",
+    "nohup:dregistry": "sh scripts/dregistry.nohup.sh",
+    "pid:dregistry": "sh scripts/dregistry.pid.sh",
+    "kill:dregistry": "sh scripts/dregistry.kill.sh",
+    "docker:dregistry": "sh scripts/dregistry.docker.sh",
+    "prepack": "pnpm build",
+    "docker:build:drg": "docker build -t dregistry-drpm -f build/Dockerfile.dregistry .",
+    "docker:run:drg": "docker run --rm -p 2092:2092 --name dregistry-drpm-tools-local --network dregistry-drpm-local dregistry-drpm",
   },
   "homepage": "https://drpm.tools",
   "bugs": {

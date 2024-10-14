@@ -1,23 +1,16 @@
 import { DidDht, DidWeb, UniversalResolver } from '@web5/dids';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
-import { Logger } from '../../common/src/logger.js';
-import { DpkRequest, DpkResponse, DwnResponse, QueryFilters } from '../../common/src/types.js';
-import { ResponseUtils } from '../../common/src/dwn.js';
+import { ResponseUtils, Logger, DpkRequest, DpkResponse, DwnResponse, QueryFilters } from '@drpm/common';
 
 const DidResolver = new UniversalResolver({ didResolvers: [DidDht, DidWeb] });
 const trailingSlashRegex = /\/$/;
 
 export async function findEntryPoint(modulePath: string): Promise<string> {
-  // Logger.debug('findEntryPoint => modulePath', modulePath);
   const packageJsonPath = join('node_modules', modulePath, 'package.json');
-  // Logger.debug('findEntryPoint => packageJsonPath', packageJsonPath);
   const packageJsonContent = await readFile(packageJsonPath, 'utf8');
-  // Logger.debug('findEntryPoint => packageJsonContent', packageJsonContent);
   const packageJson = JSON.parse(packageJsonContent);
-  // Logger.debug('findEntryPoint => packageJson', packageJson);
   const entryPoint = (packageJson.type === 'module' ? packageJson.module : packageJson.main) ?? packageJson.main;
-  // Logger.debug('findEntryPoint => entryPoint', entryPoint);
   return entryPoint;
 }
 
@@ -30,13 +23,10 @@ export function encodeURIQueryFilters(queryFilters: QueryFilters): string {
 }
 
 export async function getDwnEndpoints(did: string) {
-  // Logger.debug('getDwnEndpoints => did', did);
   const { didDocument } = await DidResolver.resolve(did);
-  // Logger.debug('getDwnEndpoints => didDocument', JSON.stringify(didDocument, null, 2));
   const services = didDocument?.service;
   const didServiceEndpoint = services?.find(service => service.type === 'DecentralizedWebNode')?.serviceEndpoint ?? ['http://localhost:3000/'];
   const serviceEndpoints = Array.isArray(didServiceEndpoint) ? didServiceEndpoint : [didServiceEndpoint];
-  // Logger.debug('getDwnEndpoints => serviceEndpoints', serviceEndpoints);
   return serviceEndpoints.map(endpoint => endpoint.replace(trailingSlashRegex, ''));
 }
 
@@ -73,7 +63,6 @@ export async function fetchDPK({ did, dpk: { name, version, integrity }}: DpkReq
       }
       const { recordId, descriptor: { dataFormat } } = entry ?? {};
       const drl = `${baseDRL}/read/records/${recordId}`;
-      // Logger.info(`Reading from DRL ${drl} ...`);
 
       const read: Response = await fetch(drl);
       if (!read || !read.ok) {

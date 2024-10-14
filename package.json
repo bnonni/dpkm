@@ -2,25 +2,10 @@
   "name": "drpm",
   "version": "0.1.0",
   "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
   "description": "Decentralized Registry Package Manager Monorepo (DPM)(디피엠) contains tools for interacting with the DWeb. DRPM tools leverage decentralized identifiers (DIDs) to reference decentralized packages stored in a Decentralized Web Node (DWN).",
-  "directories": {
-    "docs": "./docs",
-    "protocols": "./protocols",
-    "scripts": "./scripts",
-    "lib": "./lib",
-    "build": "./build"
-  },
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
-  "types": "./dist/types/index.d.ts",
-  "bin": "./dist/esm/cli/drpm.js",
-  "exports": {
-    ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js"
-    },
-    "./package.json": "./package.json"
-  },
   "scripts": {
     "test:register-hooks": "npm run build:tests; node --import ./dist/esm/src/register.js ./tests/compiled/tests/register-hooks.spec.js",
     "audit-ci": "audit-ci --config ./audit-ci.json",
@@ -30,13 +15,14 @@
     "coverage": "codecov upload-process -t $CODECOV_TOKEN -r TBD54566975/incubation-dcx",
     "lint": "pnpm --recursive --stream lint",
     "lint:fix": "pnpm --recursive --stream lint:fix",
-    "publish:all": "pnpm --filter applicant publish && pnpm --filter common publish && pnpm --filter issuer publish && pnpm --filter server publish",
+    "publish:all": "pnpm --filter common publish && pnpm --filter dpk publish && pnpm --filter dpm publish && pnpm --filter drg publish",
     "test": "pnpm --recursive --stream test",
     "version": "tsx scripts/version.ts",
     "common": "pnpm --filter common",
     "dpk": "pnpm --filter dpk",
     "dpm": "pnpm --filter dpm",
-    "prepare": "npm run build",
+    "drg": "pnpm --filter drg",
+    "prepack": "pnpm build",
     "postinstall": "sh ./scripts/postinstall.sh"
   },
   "homepage": "https://drpm.tools",

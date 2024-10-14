@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { DPM_PORT, REGISTRY_PROCESS_NAME } from '../config.js';
+import { DPM_PORT, REGISTRY_PROCESS_NAME } from './config.js';
 
 process.title = REGISTRY_PROCESS_NAME;
 
@@ -7,7 +7,7 @@ process.title = REGISTRY_PROCESS_NAME;
  * Module dependencies.
  */
 import http from 'http';
-import app from '../../../src/registry/index.js';
+import app from './dregistry.js';
 
 /**
  * Get port from environment and store in Express.
