@@ -36,7 +36,7 @@ Acronyms galore! But what does it all mean!?
 - DPM = Decentralized Package Manager
 - DRPM = Decentralized Registry Package Manager
 - DMI = Decentralized Module Import
-- DPI = Decentralized Package Import - different name for DMI
+- DPI = Decentralized Package Import (alt name for DMI)
 
 ### Other Vocab
 
