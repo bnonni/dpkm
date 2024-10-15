@@ -223,6 +223,9 @@ importers:
 
   packages/dpk:
     dependencies:
+      '@drpm/common':
+        specifier: ^0.1.0
+        version: 0.1.0(ws@8.18.0)
       '@ngrok/ngrok':
         specifier: ^1.4.1
         version: 1.4.1
@@ -447,6 +450,10 @@ packages:
   '@dnsquery/dns-packet@6.1.1':
     resolution: {integrity: sha512-WXTuFvL3G+74SchFAtz3FgIYVOe196ycvGsMgvSH/8Goptb1qpIQtIuM4SOK9G9lhMWYpHxnXyy544ZhluFOew==}
     engines: {node: '>=6'}
+
+  '@drpm/common@0.1.0':
+    resolution: {integrity: sha512-ExQAvOGI3FaTTziANDdPANR/4TSOsDaCSKCb6bSRUjff/GXti76a5+41SZOHIHSaAtjK4nNVeHHqZIjHBD8pUA==}
+    hasBin: true
 
   '@esbuild/aix-ppc64@0.23.1':
     resolution: {integrity: sha512-6VhYk1diRqrhBAqpJEdjASR/+WVRtfjpqKuNw11cLiaWpAT/Uu+nokB+UJnevzy/P9C/ty6AOe0dwueMrGh/iQ==}
@@ -2435,6 +2442,23 @@ snapshots:
     dependencies:
       '@leichtgewicht/ip-codec': 2.0.5
       utf8-codec: 1.0.0
+
+  '@drpm/common@0.1.0(ws@8.18.0)':
+    dependencies:
+      '@ngrok/ngrok': 1.4.1
+      '@web5/agent': 0.7.4(ws@8.18.0)
+      '@web5/api': 0.10.0(ws@8.18.0)
+      '@web5/dids': 1.1.5
+      body-parser: 1.20.3
+      commander: 12.1.0
+      cors: 2.8.5
+      express: 4.21.1
+      fs-extra: 11.2.0
+      tar: 7.4.3
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+      - ws
 
   '@esbuild/aix-ppc64@0.23.1':
     optional: true

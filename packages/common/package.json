@@ -3,17 +3,9 @@
   "version": "0.1.0",
   "type": "module",
   "description": "Decentralized Package - contains core logic for DRPM",
-  "directories": {
-    "docs": "./docs",
-    "protocols": "./protocols",
-    "scripts": "./scripts",
-    "lib": "./lib",
-    "build": "./build"
-  },
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/types/index.d.ts",
-  "bin": "./dist/esm/cli/drpm.js",
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
